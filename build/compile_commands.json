@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/Users/lyra/Desktop/untitled/build",
+  "command": "\"D:\\Program Files\\winlibs-x86_64-posix-seh-gcc-13.2.0-llvm-17.0.6-mingw-w64ucrt-11.0.1-r5\\mingw64\\bin\\g++.exe\"  @CMakeFiles/example.dir/includes_CXX.rsp -g -o CMakeFiles\\example.dir\\tra.cpp.obj -c C:\\Users\\lyra\\Desktop\\untitled\\tra.cpp",
+  "file": "C:/Users/lyra/Desktop/untitled/tra.cpp",
+  "output": "CMakeFiles/example.dir/tra.cpp.obj"
+},
+{
+  "directory": "C:/Users/lyra/Desktop/untitled/build",
+  "command": "\"D:\\Program Files\\winlibs-x86_64-posix-seh-gcc-13.2.0-llvm-17.0.6-mingw-w64ucrt-11.0.1-r5\\mingw64\\bin\\gcc.exe\"  @CMakeFiles/example.dir/includes_C.rsp -g -o CMakeFiles\\example.dir\\glad.c.obj -c C:\\Users\\lyra\\Desktop\\untitled\\glad.c",
+  "file": "C:/Users/lyra/Desktop/untitled/glad.c",
+  "output": "CMakeFiles/example.dir/glad.c.obj"
+}
+]
