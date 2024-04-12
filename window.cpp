@@ -34,7 +34,7 @@ int main() {
 #endif
 
     // 创建窗口
-    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "第一个窗口", NULL, NULL);
     // 检测窗口
     check_window(window);
     // 设置当前窗口context为主线程

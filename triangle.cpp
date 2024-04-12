@@ -21,6 +21,9 @@ int load_opengl_fun_ptr();
 // 编译着色器
 unsigned int compile_shader();
 
+// 绘制
+void draw_my_triangle(GLFWwindow *window, unsigned int shaderProgram);
+
 // 定义屏幕宽和高
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -43,59 +46,10 @@ int main() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     // 加载opengl函数指针
     load_opengl_fun_ptr();
-    // 开始绘制
+    // 编译着色器
     auto shaderProgram = compile_shader();
-
-    float vertices[] = {
-            -0.5f, -0.5f, 0.0f, // left
-            0.5f, -0.5f, 0.0f, // right
-            0.0f, 0.5f, 0.0f  // top
-    };
-
-    unsigned int VBO, VAO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
-    glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glBindVertexArray(0);
-
-    while (!glfwWindowShouldClose(window)) {
-        // input
-        // -----
-        processInput(window);
-
-        // render
-        // ------
-        glClearColor(0.6f, 0.7f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // draw our first triangle
-        glUseProgram(shaderProgram);
-        glBindVertexArray(
-                VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        // glBindVertexArray(0); // no need to unbind it every time
-
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-
-    // optional: de-allocate all resources once they've outlived their purpose:
-    // ------------------------------------------------------------------------
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shaderProgram);
-
+    // 绘制
+    draw_my_triangle(window, shaderProgram);
     // 清除glfw资源
     glfwTerminate();
     return 0;
@@ -198,4 +152,59 @@ unsigned int compile_shader() {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
     return shaderProgram;
+}
+
+
+
+void draw_my_triangle(GLFWwindow *window, unsigned int shaderProgram) {
+    float vertices[] = {
+            -0.5f, -0.5f, 0.0f, // left
+            0.5f, -0.5f, 0.0f, // right
+            0.0f, 0.5f, 0.0f  // top
+    };
+
+    unsigned int VBO, VAO;
+
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glBindVertexArray(0);
+
+    while (!glfwWindowShouldClose(window)) {
+        // input
+        // -----
+        processInput(window);
+
+        // render
+        // ------
+        glClearColor(0.6f, 0.7f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // draw our first triangle
+        glUseProgram(shaderProgram);
+        glBindVertexArray(
+                VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        // glBindVertexArray(0); // no need to unbind it every time
+
+        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+        // -------------------------------------------------------------------------------
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+
+    // optional: de-allocate all resources once they've outlived their purpose:
+    // ------------------------------------------------------------------------
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shaderProgram);
 }
