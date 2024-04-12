@@ -10,7 +10,7 @@ include_directories("./include/")
 link_directories("./lib/")
 
 # 编译
-add_executable(demo1 main.cpp glad.c)
+add_executable(demo1 window.cpp glad.c)
 add_executable(demo2 triangle.cpp glad.c)
 
 # 连接 (gdi32.dll和opengl32.dll在c盘system32里)

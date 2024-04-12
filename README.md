@@ -20,7 +20,7 @@ include_directories("./include/")
 link_directories("./lib/")
 
 # 编译
-add_executable(example main.cpp glad.c)
+add_executable(example window.cpp glad.c)
 
 # 连接
 target_link_libraries(example glfw3 gdi32 opengl32)
